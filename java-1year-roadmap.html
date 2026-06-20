@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-Year Java Developer Roadmap — Top 1%</title>
+<style>
+/* ─── RESET ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ─── PHASE COLOR MAP ─────────────────────────────────────── */
+:root {
+  --p1: #1565c0; --p1l: #e3f2fd; --p1b: #bbdefb;
+  --p2: #6a1b9a; --p2l: #f3e5f5; --p2b: #ce93d8;
+  --p3: #2e7d32; --p3l: #e8f5e9; --p3b: #a5d6a7;
+  --p4: #e65100; --p4l: #fff3e0; --p4b: #ffcc80;
+  --p5: #00695c; --p5l: #e0f2f1; --p5b: #80cbc4;
+  --p6: #c62828; --p6l: #ffebee; --p6b: #ef9a9a;
+  --p7: #4527a0; --p7l: #ede7f6; --p7b: #b39ddb;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────────── */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14.5px; line-height: 1.7; color: #1a1a2e;
+  display: flex; min-height: 100vh; background: #f0f4f8;
+}
+
+/* ─── SIDEBAR ─────────────────────────────────────────────────── */
+#sidebar {
+  width: 270px; min-width: 270px;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: #0d1b2a;
+  padding: 0 0 2rem;
+  flex-shrink: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #1565c0 #0d1b2a;
+}
+#sidebar::-webkit-scrollbar { width: 3px; }
+#sidebar::-webkit-scrollbar-thumb { background: #1565c0; }
+
+.sb-header {
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  padding: 1rem 1.2rem .8rem;
+  border-bottom: 2px solid #1976d2;
+}
+.sb-header h2 { font-size: .85rem; color: #fff; font-weight: 800; letter-spacing: .05em; }
+.sb-header p  { font-size: .68rem; color: #90caf9; margin-top: .2rem; }
+
+.sb-section { margin-top: .5rem; }
+.sb-phase-label {
+  display: flex; align-items: center; gap: .4rem;
+  padding: .5rem 1rem .25rem;
+  font-size: .63rem; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #fff; margin-top: .6rem;
+}
+.sb-phase-label .dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+#sidebar a {
+  display: block; padding: .25rem 1rem .25rem 1.8rem;
+  font-size: .75rem; color: #90a4ae; text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .12s;
+  line-height: 1.45;
+}
+#sidebar a:hover { background: #162032; color: #e3f2fd; border-left-color: #42a5f5; }
+#sidebar a.active { background: #1a3a55; color: #fff; border-left-color: #42a5f5; font-weight: 600; }
+#sidebar a.week-link { padding-left: 2.4rem; font-size: .72rem; }
+
+/* ─── MAIN ─────────────────────────────────────────────────────── */
+#main {
+  flex: 1; max-width: 950px;
+  padding: 2rem 2.8rem 5rem;
+  background: #fff; min-width: 0;
+}
+
+/* ─── TYPOGRAPHY ─────────────────────────────────────────────── */
+h1 { font-size: 2rem; color: #0d47a1; }
+h2 { font-size: 1.45rem; color: #1565c0; margin: 2rem 0 .5rem;
+     border-bottom: 2px solid #bbdefb; padding-bottom: .3rem; }
+h3 { font-size: 1.1rem; color: #0d47a1; margin: 1.4rem 0 .35rem; }
+p  { margin-bottom: .7rem; }
+ul { margin: .3rem 0 .7rem 1.4rem; }
+li { margin-bottom: .25rem; }
+a  { color: #1565c0; }
+strong { color: #1a1a2e; }
+
+/* ─── HERO ────────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);
+  color: #fff; border-radius: 12px; padding: 2.2rem 2.5rem;
+  margin-bottom: 2rem;
+}
+.hero h1 { color: #fff; font-size: 1.9rem; }
+.hero p  { color: #bbdefb; margin: .4rem 0 0; font-size: .95rem; }
+.hero .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.badge {
+  background: rgba(255,255,255,.15); color: #fff;
+  border-radius: 20px; padding: .25rem .75rem;
+  font-size: .75rem; font-weight: 600; border: 1px solid rgba(255,255,255,.25);
+}
+
+/* ─── PHASE HEADER ────────────────────────────────────────────── */
+.phase-header {
+  border-radius: 10px; padding: 1.2rem 1.6rem;
+  margin: 2.5rem 0 1.2rem; border-left: 6px solid;
+}
+.phase-header h2 { border: none; margin: 0 0 .25rem; padding: 0; }
+.phase-header .phase-meta { font-size: .8rem; font-weight: 600; opacity: .8; }
+
+.ph1 { background: var(--p1l); border-color: var(--p1); }
+.ph1 h2 { color: var(--p1); }
+.ph2 { background: var(--p2l); border-color: var(--p2); }
+.ph2 h2 { color: var(--p2); }
+.ph3 { background: var(--p3l); border-color: var(--p3); }
+.ph3 h2 { color: var(--p3); }
+.ph4 { background: var(--p4l); border-color: var(--p4); }
+.ph4 h2 { color: var(--p4); }
+.ph5 { background: var(--p5l); border-color: var(--p5); }
+.ph5 h2 { color: var(--p5); }
+.ph6 { background: var(--p6l); border-color: var(--p6); }
+.ph6 h2 { color: var(--p6); }
+.ph7 { background: var(--p7l); border-color: var(--p7); }
+.ph7 h2 { color: var(--p7); }
+
+/* ─── WEEK CARD ────────────────────────────────────────────────── */
+.week-card {
+  background: #fafafa; border: 1px solid #e0e0e0;
+  border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1rem;
+  border-left: 4px solid #e0e0e0;
+}
+.week-card h3 { margin-top: 0; font-size: 1rem; }
+.week-card.w1 { border-left-color: var(--p1); }
+.week-card.w2 { border-left-color: var(--p2); }
+.week-card.w3 { border-left-color: var(--p3); }
+.week-card.w4 { border-left-color: var(--p4); }
+.week-card.w5 { border-left-color: var(--p5); }
+.week-card.w6 { border-left-color: var(--p6); }
+.week-card.w7 { border-left-color: var(--p7); }
+
+/* ─── TAGS ─────────────────────────────────────────────────────── */
+.tag {
+  display: inline-block; font-size: .65rem; font-weight: 700;
+  letter-spacing: .05em; text-transform: uppercase;
+  border-radius: 3px; padding: .12rem .4rem;
+  margin-right: .3rem; margin-bottom: .2rem;
+}
+.tag-practice { background: #e65100; color: #fff; }
+.tag-project  { background: #2e7d32; color: #fff; }
+.tag-exit     { background: #1565c0; color: #fff; }
+.tag-month    { background: #6a1b9a; color: #fff; }
+
+/* ─── EXIT CRITERIA BOX ─────────────────────────────────────── */
+.exit-box {
+  background: #e8f5e9; border: 1px solid #a5d6a7;
+  border-radius: 8px; padding: .8rem 1.1rem; margin: 1rem 0;
+}
+.exit-box strong { color: #2e7d32; }
+
+/* ─── PROJECT BOX ──────────────────────────────────────────────── */
+.project-box {
+  background: #fff3e0; border: 1px solid #ffcc80;
+  border-radius: 8px; padding: .8rem 1.1rem; margin: 1rem 0;
+}
+.project-box strong { color: #e65100; }
+
+/* ─── TIMELINE TABLE ───────────────────────────────────────────── */
+.timeline-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; font-size: .88rem; }
+.timeline-table th {
+  background: #0d47a1; color: #fff;
+  padding: .55rem 1rem; text-align: left;
+}
+.timeline-table td { padding: .5rem 1rem; border-bottom: 1px solid #e0e0e0; }
+.timeline-table tr:nth-child(even) td { background: #f5f7fa; }
+.tl-phase {
+  display: inline-block; border-radius: 4px;
+  padding: .15rem .5rem; font-size: .75rem; font-weight: 700; color: #fff;
+}
+
+/* ─── RESOURCES ─────────────────────────────────────────────────── */
+.resources-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: .8rem; margin: 1rem 0;
+}
+.resource-card {
+  background: #f3f4f6; border-radius: 8px;
+  padding: .8rem 1rem; border-top: 3px solid #1565c0;
+}
+.resource-card h4 { font-size: .82rem; color: #1565c0; margin-bottom: .35rem; }
+.resource-card p  { font-size: .78rem; color: #444; margin: 0; }
+
+/* ─── HOW TO USE ─────────────────────────────────────────────────── */
+.how-box {
+  background: #e8eaf6; border-radius: 8px;
+  padding: 1rem 1.4rem; margin: 1.2rem 0 1.8rem;
+  border-left: 4px solid #3f51b5;
+}
+.how-box h3 { color: #3f51b5; margin-top: 0; font-size: .95rem; }
+
+/* ─── CODE ──────────────────────────────────────────────────────── */
+code {
+  background: #e8eaf6; color: #1a237e;
+  border-radius: 3px; padding: .1rem .35rem; font-size: .88em;
+  font-family: "Cascadia Code","Fira Code","Consolas",monospace;
+}
+
+/* ─── PRINT ─────────────────────────────────────────────────────── */
+@media print {
+  html, body { display: block !important; background: #fff; }
+  #sidebar { display: none !important; }
+  #main { max-width: 100% !important; padding: 1rem 1.5rem !important; font-size: 12px !important; }
+  .phase-header { break-before: page; }
+  .week-card { break-inside: avoid; }
+  .hero { background: #1565c0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .phase-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: #000; text-decoration: none; }
+}
+
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  #sidebar { width: 100%; height: auto; position: relative; }
+  #main { padding: 1rem; }
+}
+</style>
+
+<script>
+(function(){
+  window.addEventListener('DOMContentLoaded', function(){
+    var links = document.querySelectorAll('#sidebar a[href^="#"]');
+    var targets = Array.from(links).map(function(l){
+      return document.querySelector(l.getAttribute('href'));
+    }).filter(Boolean);
+
+    function update(){
+      var sy = window.scrollY + 130;
+      var active = targets[0];
+      for(var i=0;i<targets.length;i++){
+        if(targets[i].getBoundingClientRect().top + window.scrollY <= sy) active = targets[i];
+      }
+      links.forEach(function(l){ l.classList.remove('active'); });
+      var al = document.querySelector('#sidebar a[href="#'+active.id+'"]');
+      if(al){
+        al.classList.add('active');
+        var sb = document.getElementById('sidebar');
+        var t = al.offsetTop;
+        if(t < sb.scrollTop + 60 || t > sb.scrollTop + sb.clientHeight - 80)
+          sb.scrollTop = t - sb.clientHeight/2;
+      }
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  });
+})();
+</script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  STICKY SIDEBAR                                               -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<nav id="sidebar">
+  <div class="sb-header">
+    <h2>Java Top 1% Roadmap</h2>
+    <p>1 Year · 48 Weeks · 7 Phases</p>
+  </div>
+
+  <div class="sb-section">
+    <a href="#overview" style="padding-left:1rem;color:#90caf9;font-weight:700;font-size:.78rem;">Overview &amp; Timeline</a>
+
+    <!-- Phase 1 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#1565c0"></span>Phase 1 — Core Java (Mo 1–2)</div>
+    <a href="#w1" class="week-link">Week 1 — Setup + Syntax</a>
+    <a href="#w2" class="week-link">Week 2 — OOP Part 1</a>
+    <a href="#w3" class="week-link">Week 3 — OOP Part 2</a>
+    <a href="#w4" class="week-link">Week 4 — OOP Part 3 + Strings</a>
+    <a href="#w5" class="week-link">Week 5 — Exception Handling</a>
+    <a href="#w6" class="week-link">Week 6 — Collections</a>
+    <a href="#w7" class="week-link">Week 7 — Generics + I/O</a>
+    <a href="#w8" class="week-link">Week 8 — Phase 1 Project</a>
+
+    <!-- Phase 2 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#6a1b9a"></span>Phase 2 — Advanced Java (Mo 3–4)</div>
+    <a href="#w9" class="week-link">Week 9 — Functional Programming</a>
+    <a href="#w10" class="week-link">Week 10 — Stream API</a>
+    <a href="#w11" class="week-link">Week 11 — Java 8 + Java 9–17</a>
+    <a href="#w12" class="week-link">Week 12 — Java 18–21 + JVM</a>
+    <a href="#w13" class="week-link">Week 13 — Concurrency Basics</a>
+    <a href="#w14" class="week-link">Week 14 — Advanced Concurrency</a>
+    <a href="#w15" class="week-link">Week 15 — Thread Pools + CF</a>
+    <a href="#w16" class="week-link">Week 16 — GC + Performance</a>
+
+    <!-- Phase 3 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#2e7d32"></span>Phase 3 — Spring Boot (Mo 5–6)</div>
+    <a href="#w17" class="week-link">Week 17 — Spring Core: IoC + DI</a>
+    <a href="#w18" class="week-link">Week 18 — Spring Boot Essentials</a>
+    <a href="#w19" class="week-link">Week 19 — AOP + Events + REST</a>
+    <a href="#w20" class="week-link">Week 20 — Spring Data JPA</a>
+    <a href="#w21" class="week-link">Week 21 — Spring Security</a>
+    <a href="#w22" class="week-link">Week 22 — Testing</a>
+    <a href="#w23" class="week-link">Week 23 — Phase 3 Project</a>
+    <a href="#w24" class="week-link">Week 24 — Review + Source</a>
+
+    <!-- Phase 4 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#e65100"></span>Phase 4 — DB + Kafka + Redis (Mo 7)</div>
+    <a href="#w25" class="week-link">Week 25 — SQL Deep Dive</a>
+    <a href="#w26" class="week-link">Week 26 — Kafka + Redis + ES</a>
+    <a href="#w27" class="week-link">Week 27 — Design Patterns</a>
+    <a href="#w28" class="week-link">Week 28 — Phase 4 Project</a>
+
+    <!-- Phase 5 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#00695c"></span>Phase 5 — Microservices + K8s (Mo 8–9)</div>
+    <a href="#w29" class="week-link">Week 29 — MS Foundations</a>
+    <a href="#w30" class="week-link">Week 30 — Communication + Resilience</a>
+    <a href="#w31" class="week-link">Week 31 — Distributed Patterns</a>
+    <a href="#w32" class="week-link">Week 32 — Docker</a>
+    <a href="#w33" class="week-link">Week 33 — Kubernetes Core</a>
+    <a href="#w34" class="week-link">Week 34 — Kubernetes Advanced</a>
+    <a href="#w35" class="week-link">Week 35 — Observability</a>
+    <a href="#w36" class="week-link">Week 36 — Phase 5 Capstone</a>
+
+    <!-- Phase 6 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#c62828"></span>Phase 6 — AWS (Mo 10)</div>
+    <a href="#w37" class="week-link">Week 37 — AWS Foundations</a>
+    <a href="#w38" class="week-link">Week 38 — Managed Services</a>
+    <a href="#w39" class="week-link">Week 39 — Monitoring + Security</a>
+    <a href="#w40" class="week-link">Week 40 — IaC + CI/CD</a>
+
+    <!-- Phase 7 -->
+    <div class="sb-phase-label"><span class="dot" style="background:#4527a0"></span>Phase 7 — System Design (Mo 11–12)</div>
+    <a href="#w41" class="week-link">Week 41–42 — System Design</a>
+    <a href="#w43" class="week-link">Week 43–44 — DSA</a>
+    <a href="#w45" class="week-link">Week 45–46 — Interview Drill</a>
+    <a href="#w47" class="week-link">Week 47–48 — Capstone + Portfolio</a>
+
+    <a href="#resources" style="padding-left:1rem;color:#90caf9;font-size:.75rem;margin-top:.8rem;display:block;">Resources</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  MAIN CONTENT                                                  -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<main id="main">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>1-Year Java Developer Roadmap</h1>
+  <p>From zero to top 1% — Java core · Advanced Java 21 · Spring Boot · Microservices · Kubernetes · AWS</p>
+  <div class="badges">
+    <span class="badge">48 Weeks</span>
+    <span class="badge">7 Phases</span>
+    <span class="badge">Java 21/25</span>
+    <span class="badge">Spring Boot 3</span>
+    <span class="badge">Microservices</span>
+    <span class="badge">Docker + K8s</span>
+    <span class="badge">AWS</span>
+    <span class="badge">System Design</span>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<div class="how-box" id="overview">
+  <h3>How to use this roadmap</h3>
+  <ul>
+    <li><strong>6 days/week active learning</strong>: 3–4h study + 1–2h coding practice each day</li>
+    <li><strong>1 day/week</strong>: review, project work, or mock interview</li>
+    <li><strong>Each phase ends with a project</strong> — build it to prove mastery, not just read it</li>
+    <li><strong>Topics are ordered by dependency</strong> — do not skip ahead; each week builds on the last</li>
+    <li><strong>Print to PDF</strong>: Open in Chrome → Ctrl+P → Save as PDF (sidebar hidden automatically)</li>
+  </ul>
+</div>
+
+<!-- TIMELINE TABLE -->
+<h2 style="margin-top:0">Full 12-Month Timeline</h2>
+<table class="timeline-table">
+  <thead>
+    <tr><th>Month</th><th>Phase</th><th>Focus</th><th>Project</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td><span class="tl-phase" style="background:var(--p1)">Phase 1</span></td><td>Java syntax, OOP, strings, I/O</td><td>BankAccount class</td></tr>
+    <tr><td>2</td><td><span class="tl-phase" style="background:var(--p1)">Phase 1</span></td><td>Exceptions, collections, generics</td><td>Library Management System</td></tr>
+    <tr><td>3</td><td><span class="tl-phase" style="background:var(--p2)">Phase 2</span></td><td>Lambdas, streams, Optional, date/time</td><td>Analytics dashboard</td></tr>
+    <tr><td>4</td><td><span class="tl-phase" style="background:var(--p2)">Phase 2</span></td><td>Concurrency, JVM internals, GC</td><td>Stock price aggregator</td></tr>
+    <tr><td>5</td><td><span class="tl-phase" style="background:var(--p3)">Phase 3</span></td><td>Spring Core, Boot, JPA, Hibernate</td><td>E-commerce data model</td></tr>
+    <tr><td>6</td><td><span class="tl-phase" style="background:var(--p3)">Phase 3</span></td><td>Spring Security, testing</td><td>RESTful E-commerce API</td></tr>
+    <tr><td>7</td><td><span class="tl-phase" style="background:var(--p4)">Phase 4</span></td><td>SQL, Kafka, Redis, design patterns</td><td>Extend e-commerce API</td></tr>
+    <tr><td>8</td><td><span class="tl-phase" style="background:var(--p5)">Phase 5</span></td><td>Microservices, Docker, Kafka patterns</td><td>Order + Inventory services</td></tr>
+    <tr><td>9</td><td><span class="tl-phase" style="background:var(--p5)">Phase 5</span></td><td>Kubernetes, Helm, observability</td><td>3-service K8s deployment</td></tr>
+    <tr><td>10</td><td><span class="tl-phase" style="background:var(--p6)">Phase 6</span></td><td>AWS: IAM, EC2, EKS, RDS, Lambda, CI/CD</td><td>EKS + RDS deployment</td></tr>
+    <tr><td>11</td><td><span class="tl-phase" style="background:var(--p7)">Phase 7</span></td><td>System design, DSA, mock interviews</td><td>8 system design docs</td></tr>
+    <tr><td>12</td><td><span class="tl-phase" style="background:var(--p7)">Phase 7</span></td><td>Interview drill, capstone, portfolio</td><td>Event-driven e-commerce platform</td></tr>
+  </tbody>
+</table>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 1                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph1" id="phase1">
+  <div class="phase-meta">Phase 1 · Months 1–2 · Weeks 1–8</div>
+  <h2>Core Java Fundamentals</h2>
+</div>
+<p>Build the unshakeable foundation. Every topic in every later phase assumes you can read, write, and reason about all of these concepts fluently.</p>
+
+<h3><span class="tag tag-month">Month 1</span> Language Basics</h3>
+
+<div class="week-card w1" id="w1">
+  <h3>Week 1 — Setup + Java Syntax</h3>
+  <ul>
+    <li>Install JDK 21, IntelliJ IDEA Community, Maven / Gradle</li>
+    <li>Variables, data types (<code>int</code>, <code>long</code>, <code>double</code>, <code>boolean</code>, <code>char</code>), type casting (widening / narrowing)</li>
+    <li>Operators: arithmetic, logical, bitwise (<code>&amp;</code> <code>|</code> <code>^</code> <code>~</code> <code>&lt;&lt;</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code>), ternary, assignment</li>
+    <li>Control flow: <code>if/else</code>, <code>switch</code>, <code>for</code>, <code>while</code>, <code>do-while</code>, enhanced for</li>
+    <li>Arrays: 1D, 2D, jagged; <code>Arrays.sort</code>, <code>Arrays.copyOf</code></li>
+    <li>Method definitions, parameters, return types, varargs</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Write 20 programs: FizzBuzz, Fibonacci, prime sieve, palindrome check, factorial, Armstrong number, matrix transpose, binary search</p>
+</div>
+
+<div class="week-card w1" id="w2">
+  <h3>Week 2 — OOP Part 1: Classes, Encapsulation</h3>
+  <ul>
+    <li>Classes and objects; <code>new</code> keyword; object reference vs primitive</li>
+    <li>Constructors: default (compiler-generated), parameterized, copy constructor</li>
+    <li>Access modifiers: <code>public</code>, <code>private</code>, <code>protected</code>, package-private</li>
+    <li><code>this</code> keyword — reference to current instance; disambiguate fields</li>
+    <li>Static fields and methods; static initializer blocks</li>
+    <li>Encapsulation: private fields, public getters/setters, immutable class design (<code>final</code> fields + no setters)</li>
+    <li>Packages and import statements</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Design a <code>BankAccount</code> class: private balance, deposit/withdraw with validation, formatted statement output</p>
+</div>
+
+<div class="week-card w1" id="w3">
+  <h3>Week 3 — OOP Part 2: Inheritance + Polymorphism</h3>
+  <ul>
+    <li>Inheritance: <code>extends</code>, single-inheritance constraint in Java</li>
+    <li><code>super</code> keyword — call parent constructor, access parent methods</li>
+    <li>Constructor chaining: <code>this(...)</code> within same class, <code>super(...)</code> to parent</li>
+    <li>Method overriding: <code>@Override</code> annotation, covariant return types</li>
+    <li><code>final</code> keyword: final class (no subclassing), final method (no override), final variable (no reassignment)</li>
+    <li>Abstract classes: <code>abstract</code> keyword, abstract methods, partial implementation</li>
+    <li>Interfaces: <code>implements</code>, multiple implementation, contract design</li>
+    <li>Polymorphism: dynamic dispatch (runtime method resolution), upcasting, downcasting, <code>instanceof</code></li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Shape hierarchy: <code>Shape</code> (abstract) → <code>Circle</code>, <code>Rectangle</code>, <code>Triangle</code>. Each implements <code>area()</code> and <code>perimeter()</code>. Store in <code>List&lt;Shape&gt;</code>, iterate polymorphically</p>
+</div>
+
+<div class="week-card w1" id="w4">
+  <h3>Week 4 — OOP Part 3 + String Internals</h3>
+  <ul>
+    <li>Multiple interface implementation; interface default and static methods (Java 8+)</li>
+    <li>Interface vs abstract class: when to use each; interface segregation</li>
+    <li><strong>String internals</strong>: string pool, <code>intern()</code>, immutability, compact strings (Java 9+)</li>
+    <li>String methods: <code>substring</code>, <code>split</code>, <code>replace</code>, <code>replaceAll</code>, <code>format</code>, <code>strip</code>, <code>isBlank</code>, <code>repeat</code>, <code>lines</code></li>
+    <li><code>StringBuilder</code> vs <code>StringBuffer</code>: when to use each; why <code>+</code> in loops is slow</li>
+    <li>Regex: compile <code>Pattern</code>, match with <code>Matcher</code>; groups, quantifiers, anchors</li>
+    <li><code>String.format</code>, <code>formatted()</code> (Java 15+)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Build a CSV parser; email validator with regex; word frequency counter</p>
+</div>
+
+<h3><span class="tag tag-month">Month 2</span> Core Java Depth</h3>
+
+<div class="week-card w1" id="w5">
+  <h3>Week 5 — Exception Handling</h3>
+  <ul>
+    <li>Exception hierarchy: <code>Throwable</code> → <code>Error</code>, <code>Exception</code> → <code>RuntimeException</code></li>
+    <li>Checked exceptions (must declare/handle) vs unchecked (<code>RuntimeException</code> subtypes)</li>
+    <li><code>try-catch-finally</code>; multiple catch blocks; multi-catch (<code>|</code>)</li>
+    <li><code>try-with-resources</code> (<code>AutoCloseable</code>): automatic closing in reverse order</li>
+    <li>Custom exception classes: message, cause, custom fields</li>
+    <li>Exception propagation: checked exceptions must be declared with <code>throws</code></li>
+    <li>Suppressed exceptions: body exception is primary; close exceptions become suppressed</li>
+    <li>Best practices: don't swallow exceptions; don't use exceptions for control flow; log with context</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> File reader with try-with-resources; custom exception hierarchy for a domain (e.g., <code>InsufficientFundsException</code>)</p>
+</div>
+
+<div class="week-card w1" id="w6">
+  <h3>Week 6 — Collections Framework</h3>
+  <ul>
+    <li><strong>List</strong>: <code>ArrayList</code> (resizable array, O(1) random access, amortized O(1) append), <code>LinkedList</code> (doubly-linked, O(1) head/tail, poor cache locality), <code>Vector</code> (legacy, synchronized)</li>
+    <li><strong>Set</strong>: <code>HashSet</code> (hashing, unordered), <code>LinkedHashSet</code> (insertion order), <code>TreeSet</code> (sorted, red-black tree, O(log n))</li>
+    <li><strong>Map</strong>: <code>HashMap</code> (buckets, O(1) avg), <code>LinkedHashMap</code> (insertion/access order), <code>TreeMap</code> (sorted), <code>Hashtable</code> (legacy)</li>
+    <li><strong>Queue/Deque</strong>: <code>ArrayDeque</code> (preferred), <code>PriorityQueue</code> (min-heap)</li>
+    <li><code>equals</code>/<code>hashCode</code> contract: equal objects must have equal hash codes; never mutate keys after insertion</li>
+    <li><code>Comparable</code> vs <code>Comparator</code>: natural order vs custom comparator</li>
+    <li><code>Collections</code> utilities: <code>sort</code>, <code>unmodifiableList</code>, <code>synchronizedList</code>, <code>frequency</code>, <code>disjoint</code></li>
+    <li>Immutable collections: <code>List.of</code>, <code>Map.of</code>, <code>Set.of</code> (Java 9+)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Phone book (HashMap); top-K frequent words (PriorityQueue); anagram grouper (HashMap&lt;String, List&lt;String&gt;&gt;)</p>
+</div>
+
+<div class="week-card w1" id="w7">
+  <h3>Week 7 — Generics + I/O</h3>
+  <ul>
+    <li>Generic classes and methods; type parameters; bounded type parameters (<code>extends</code>, <code>super</code>)</li>
+    <li>Wildcards: <code>? extends T</code> (read-only producer), <code>? super T</code> (write-only consumer) — PECS principle</li>
+    <li>Type erasure: generics exist at compile time only; casts inserted by compiler</li>
+    <li><code>@SafeVarargs</code>; generic array creation limitations</li>
+    <li><strong>java.io</strong>: <code>File</code>, <code>FileReader/Writer</code>, <code>BufferedReader/Writer</code>, byte streams, <code>PrintWriter</code></li>
+    <li><strong>java.nio.file</strong>: <code>Path</code>, <code>Paths.get</code>, <code>Files.readAllLines</code>, <code>Files.walk</code>, <code>Files.copy</code></li>
+    <li>Serialization: <code>Serializable</code>, <code>serialVersionUID</code>, <code>ObjectOutputStream/InputStream</code>; why Java serialization is problematic (prefer Jackson/Protobuf)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Generic <code>Pair&lt;A,B&gt;</code> and <code>Triple&lt;A,B,C&gt;</code>; file copy utility; recursive directory listing with <code>Files.walk</code></p>
+</div>
+
+<div class="week-card w1" id="w8">
+  <h3>Week 8 — Phase 1 Project: Library Management System</h3>
+  <div class="project-box">
+    <strong>Project: Library Management System (console app)</strong>
+    <ul>
+      <li><strong>Entities</strong>: <code>Book</code> (ISBN, title, author, available), <code>Member</code> (id, name, borrowedBooks), <code>BorrowRecord</code></li>
+      <li><strong>Features</strong>: add/remove books, register members, borrow/return with due-date tracking, overdue fines, search by title/author/ISBN</li>
+      <li><strong>Collections</strong>: <code>HashMap</code> for ISBN lookup, <code>PriorityQueue</code> for overdue books by date</li>
+      <li><strong>File I/O</strong>: persist catalog and members to CSV on exit, reload on startup</li>
+      <li><strong>OOP design</strong>: <code>Borrowable</code> interface, <code>LibraryItem</code> abstract class, checked <code>BookNotAvailableException</code></li>
+    </ul>
+  </div>
+  <div class="exit-box">
+    <strong>Phase 1 Exit Criteria:</strong> You can predict method dispatch (overloading vs overriding), explain the equals/hashCode contract, design an exception hierarchy, and implement any collection-based algorithm without looking up syntax.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 2                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph2" id="phase2">
+  <div class="phase-meta">Phase 2 · Months 3–4 · Weeks 9–16</div>
+  <h2>Advanced Java + JVM + Modern Java 8–25</h2>
+</div>
+
+<h3><span class="tag tag-month">Month 3</span> Java 8+ Features</h3>
+
+<div class="week-card w2" id="w9">
+  <h3>Week 9 — Functional Programming + Lambdas</h3>
+  <ul>
+    <li>Lambda expressions: syntax <code>(params) -&gt; body</code>; single-expression and block form</li>
+    <li>Functional interfaces: <code>Predicate&lt;T&gt;</code>, <code>Function&lt;T,R&gt;</code>, <code>Supplier&lt;T&gt;</code>, <code>Consumer&lt;T&gt;</code>, <code>BiFunction&lt;T,U,R&gt;</code>, <code>UnaryOperator&lt;T&gt;</code>, <code>BinaryOperator&lt;T&gt;</code></li>
+    <li>Method references: <code>ClassName::staticMethod</code>, <code>instance::method</code>, <code>ClassName::instanceMethod</code>, <code>ClassName::new</code></li>
+    <li><code>@FunctionalInterface</code> annotation: enforces single abstract method</li>
+    <li>Capturing effectively-final variables; why lambdas cannot mutate captured variables</li>
+    <li>Composing predicates: <code>and</code>, <code>or</code>, <code>negate</code>; composing functions: <code>andThen</code>, <code>compose</code></li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Refactor a sorting/filtering system from anonymous inner classes to lambdas; build a pipeline with composed predicates</p>
+</div>
+
+<div class="week-card w2" id="w10">
+  <h3>Week 10 — Stream API</h3>
+  <ul>
+    <li><strong>Intermediate ops</strong> (lazy): <code>filter</code>, <code>map</code>, <code>flatMap</code>, <code>sorted</code>, <code>distinct</code>, <code>peek</code>, <code>limit</code>, <code>skip</code>, <code>mapToInt/Long/Double</code></li>
+    <li><strong>Terminal ops</strong> (trigger execution): <code>collect</code>, <code>forEach</code>, <code>reduce</code>, <code>count</code>, <code>sum</code>, <code>min</code>, <code>max</code>, <code>anyMatch</code>, <code>allMatch</code>, <code>noneMatch</code>, <code>findFirst</code>, <code>findAny</code>, <code>toList</code> (Java 16+)</li>
+    <li><strong>Collectors</strong>: <code>toList</code>, <code>toSet</code>, <code>toMap</code> (with merge fn), <code>groupingBy</code>, <code>partitioningBy</code>, <code>joining</code>, <code>counting</code>, <code>summarizingInt</code>, <code>collectingAndThen</code></li>
+    <li>Stream creation: <code>of</code>, <code>generate</code>, <code>iterate</code>, <code>range</code>, <code>concat</code>, <code>Files.lines</code></li>
+    <li>Parallel streams: ForkJoinPool common pool; pitfalls (shared mutable state, blocking calls, ordering side effects)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Employee analytics: group by department, find highest salary per department, top-3 earners, total payroll, partition above/below average</p>
+</div>
+
+<div class="week-card w2" id="w11">
+  <h3>Week 11 — Java 8 Extras + Java 9–17 Features</h3>
+  <ul>
+    <li><strong>Optional</strong>: <code>of</code>, <code>ofNullable</code>, <code>empty</code>, <code>map</code>, <code>flatMap</code>, <code>filter</code>, <code>orElse</code>, <code>orElseGet</code>, <code>orElseThrow</code>; anti-patterns (Optional field, Optional.get without check)</li>
+    <li><strong>java.time</strong>: <code>Instant</code>, <code>LocalDate</code>, <code>LocalDateTime</code>, <code>ZonedDateTime</code>, <code>Duration</code>, <code>Period</code>, <code>DateTimeFormatter</code>; zone handling; legacy <code>Date</code> conversion</li>
+    <li><strong>Java 9</strong>: modules (JPMS): <code>module-info.java</code>, <code>requires</code>, <code>exports</code>; collection factory methods; <code>Stream.takeWhile</code>, <code>dropWhile</code>, <code>ofNullable</code></li>
+    <li><strong>Java 10–11</strong>: <code>var</code> local type inference; <code>String.isBlank</code>, <code>lines</code>, <code>strip</code>, <code>repeat</code></li>
+    <li><strong>Java 14–16</strong>: Records (immutable data carriers with generated equals/hashCode/toString); <code>instanceof</code> pattern matching; text blocks (multiline strings)</li>
+    <li><strong>Java 17</strong>: Sealed classes (<code>sealed</code>/<code>permits</code>/<code>non-sealed</code>); switch expressions (arrow case, yield); pattern matching for switch (preview)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Rewrite Phase 1 project: <code>Book</code> as record, <code>LibraryItem</code> as sealed interface, switch expression for overdue calculation, text block for report</p>
+</div>
+
+<div class="week-card w2" id="w12">
+  <h3>Week 12 — Modern Java 18–21 + JVM Architecture</h3>
+  <ul>
+    <li><strong>Java 21 Virtual Threads</strong>: lightweight threads managed by JVM; <code>Thread.ofVirtual().start()</code>; <code>Executors.newVirtualThreadPerTaskExecutor()</code>; pinning on <code>synchronized</code> (use <code>ReentrantLock</code>); not for CPU-bound work</li>
+    <li><strong>Structured concurrency</strong>: <code>StructuredTaskScope</code>; child tasks finish/cancel with parent scope; prevents orphaned tasks</li>
+    <li><strong>Scoped values</strong>: <code>ScopedValue</code> — immutable, per-thread-hierarchy alternative to <code>ThreadLocal</code></li>
+    <li><strong>Sequenced collections</strong>: <code>SequencedCollection</code>, <code>SequencedSet</code>, <code>SequencedMap</code> — consistent <code>getFirst</code>/<code>getLast</code>/<code>addFirst</code>/<code>addLast</code></li>
+    <li><strong>JVM architecture</strong>: classloader hierarchy (Bootstrap → Platform → Application → custom); runtime data areas (Heap, Metaspace, Java Stacks, PC Register, Native Method Stack)</li>
+    <li><strong>Class loading</strong>: loading → linking (verification, preparation, resolution) → initialization; <code>&lt;clinit&gt;</code> runs static initializers exactly once per classloader; parent-first delegation</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Demo: virtual thread HTTP fan-out (100K requests); structured concurrency scope with ShutdownOnFailure; measure throughput vs platform threads</p>
+</div>
+
+<h3><span class="tag tag-month">Month 4</span> Concurrency + JVM Deep</h3>
+
+<div class="week-card w2" id="w13">
+  <h3>Week 13 — Concurrency Fundamentals</h3>
+  <ul>
+    <li>Thread creation: <code>extends Thread</code>, <code>implements Runnable</code>, <code>Callable</code> + <code>Future</code></li>
+    <li>Thread states: NEW → RUNNABLE → BLOCKED / WAITING / TIMED_WAITING → TERMINATED</li>
+    <li><code>Thread.sleep</code>, <code>join</code>, <code>interrupt</code>, <code>isInterrupted</code>; daemon threads</li>
+    <li><code>synchronized</code> keyword: instance method (locks <code>this</code>), static method (locks class), synchronized block (explicit monitor)</li>
+    <li>Intrinsic locks and monitors; <code>wait</code>/<code>notify</code>/<code>notifyAll</code></li>
+    <li><strong>Java Memory Model</strong>: visibility without synchronization is undefined; happens-before relation; read from stale cache possible without JMM anchors</li>
+    <li><code>volatile</code>: visibility + ordering guarantee for that variable; does NOT make compound ops atomic</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Producer-consumer using <code>wait</code>/<code>notify</code>; demonstrate data race (two threads incrementing shared counter); fix with <code>synchronized</code></p>
+</div>
+
+<div class="week-card w2" id="w14">
+  <h3>Week 14 — Advanced Concurrency</h3>
+  <ul>
+    <li><code>ReentrantLock</code>: <code>lock</code>/<code>unlock</code> (always in finally), <code>tryLock(timeout)</code>, fairness parameter</li>
+    <li><code>ReadWriteLock</code>: many concurrent readers OR one exclusive writer; ideal for read-heavy caches</li>
+    <li><code>StampedLock</code>: optimistic read mode; lower overhead for short reads</li>
+    <li><code>Condition</code>: <code>await</code>/<code>signal</code>/<code>signalAll</code>; multiple conditions per lock (e.g., notFull + notEmpty for bounded buffer)</li>
+    <li><strong>Atomic variables</strong>: <code>AtomicInteger</code>, <code>AtomicLong</code>, <code>AtomicReference</code>, <code>AtomicStampedReference</code>, <code>LongAdder</code> (striped — faster under contention)</li>
+    <li><strong>CAS</strong>: compare-and-swap hardware instruction; optimistic update loop; ABA problem and fix (<code>AtomicStampedReference</code>)</li>
+    <li><code>ThreadLocal</code>: per-thread storage; must call <code>remove()</code> in thread pool finally blocks or memory leaks occur</li>
+    <li>Coordination primitives: <code>CountDownLatch</code> (one-time gate), <code>CyclicBarrier</code> (reusable barrier), <code>Phaser</code> (dynamic participants), <code>Semaphore</code> (N permits), <code>Exchanger</code></li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Bounded buffer with <code>ReentrantLock + Condition</code>; bank transfer deadlock → fix with consistent lock ordering; synchronized vs AtomicLong vs LongAdder benchmark</p>
+</div>
+
+<div class="week-card w2" id="w15">
+  <h3>Week 15 — Thread Pools + CompletableFuture</h3>
+  <ul>
+    <li><code>ExecutorService</code>: <code>submit</code>, <code>invokeAll</code>, <code>invokeAny</code>, <code>shutdown</code>, <code>awaitTermination</code></li>
+    <li><code>ThreadPoolExecutor</code>: corePoolSize, maximumPoolSize, keepAlive, <code>BlockingQueue</code> type, <code>RejectedExecutionHandler</code> (AbortPolicy, CallerRunsPolicy, DiscardPolicy)</li>
+    <li><code>Executors</code> factory: <code>newFixedThreadPool</code> (unbounded queue — danger!), <code>newCachedThreadPool</code>, <code>newSingleThreadExecutor</code></li>
+    <li><code>ScheduledExecutorService</code>: <code>schedule</code>, <code>scheduleAtFixedRate</code>, <code>scheduleWithFixedDelay</code></li>
+    <li><code>ForkJoinPool</code>: work-stealing; <code>RecursiveTask</code>/<code>RecursiveAction</code>; common pool shared — beware blocking</li>
+    <li><strong>CompletableFuture</strong>: <code>supplyAsync</code>/<code>runAsync</code>; transformations: <code>thenApply</code> (sync), <code>thenApplyAsync</code>; chaining: <code>thenCompose</code>; combining: <code>thenCombine</code>, <code>allOf</code>, <code>anyOf</code></li>
+    <li>Exception handling: <code>exceptionally</code>, <code>handle</code>, <code>whenComplete</code></li>
+    <li>Timeouts: <code>orTimeout</code> (Java 9+), <code>completeOnTimeout</code></li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Fan-out to 3 external services concurrently with timeout + fallback + metrics; custom executor with bounded queue and CallerRuns backpressure</p>
+</div>
+
+<div class="week-card w2" id="w16">
+  <h3>Week 16 — GC + Performance Engineering</h3>
+  <ul>
+    <li><strong>GC algorithms</strong>: Serial (single-thread, tiny heaps), Parallel (throughput, batch jobs), G1 (default Java 9+, balanced, region-based, bounded pauses), ZGC (sub-ms pauses, Java 17+), Shenandoah (concurrent compaction)</li>
+    <li><strong>Heap dump analysis</strong>: trigger with <code>jcmd &lt;pid&gt; GC.heap_dump</code> or <code>-XX:+HeapDumpOnOutOfMemoryError</code>; open in MAT; dominator tree; retained size; path to GC root</li>
+    <li><strong>JFR (Java Flight Recorder)</strong>: <code>jcmd &lt;pid&gt; JFR.start duration=60s</code>; open in JMC (JDK Mission Control); CPU, allocation, GC, lock events</li>
+    <li><strong>JMH benchmarking</strong>: <code>@Benchmark</code>, <code>@Warmup</code>, <code>@Measurement</code>, <code>@Fork</code>, <code>Blackhole.consume()</code> to prevent dead-code elimination</li>
+    <li><strong>async-profiler</strong>: <code>-e cpu</code> for CPU flame graphs; <code>-e alloc</code> for allocation profiling; reads actual native stack (avoids safepoint bias)</li>
+    <li>Common memory leaks: static collections, classloader leaks, event listener not removed, unclosed resources, <code>ThreadLocal</code> not removed in pools</li>
+  </ul>
+  <div class="project-box">
+    <strong>Phase 2 Project: Concurrent Stock Price Aggregator</strong><br>
+    Fetch prices from 5 (mock) sources concurrently using virtual threads + <code>CompletableFuture</code>. Merge results, compute VWAP. Profile with async-profiler; compare platform thread pool vs virtual threads under 10K requests. Document findings with flame graph screenshots.
+  </div>
+  <div class="exit-box">
+    <strong>Phase 2 Exit Criteria:</strong> Explain JMM happens-before. Write a non-trivial CompletableFuture pipeline. Choose GC collector with justification. Profile a hotspot with async-profiler. Use all Java 8–21 features fluently.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 3                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph3" id="phase3">
+  <div class="phase-meta">Phase 3 · Months 5–6 · Weeks 17–24</div>
+  <h2>Spring Boot + Spring Data JPA + Spring Security</h2>
+</div>
+
+<h3><span class="tag tag-month">Month 5</span> Spring Core + Spring Boot</h3>
+
+<div class="week-card w3" id="w17">
+  <h3>Week 17 — Spring Core: IoC + Dependency Injection</h3>
+  <ul>
+    <li>Inversion of Control: container creates and wires objects, not you</li>
+    <li>DI styles: constructor injection (preferred — testable, immutable), setter injection, field injection (avoid — breaks encapsulation)</li>
+    <li>Stereotype annotations: <code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Controller</code></li>
+    <li><code>@Bean</code> on method in <code>@Configuration</code> class — explicit bean definition</li>
+    <li><strong>Bean lifecycle</strong>: instantiation → property injection → <code>BeanPostProcessor</code> callbacks → <code>@PostConstruct</code> → ready → <code>@PreDestroy</code> on shutdown</li>
+    <li><strong>Bean scopes</strong>: singleton (default — one per container), prototype (new per request), request, session (web-aware)</li>
+    <li><code>@Qualifier</code>, <code>@Primary</code>, <code>@Lazy</code>, <code>@Conditional</code>; circular dependency detection</li>
+    <li>ApplicationContext vs BeanFactory; <code>@Autowired</code> on constructor vs field</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> 3-layer app (Controller → Service → Repository) using constructor injection; verify Spring resolves types correctly; trigger and fix a circular dependency</p>
+</div>
+
+<div class="week-card w3" id="w18">
+  <h3>Week 18 — Spring Boot Essentials</h3>
+  <ul>
+    <li>Auto-configuration: <code>@EnableAutoConfiguration</code>; <code>spring.factories</code> / <code>AutoConfiguration.imports</code>; <code>@ConditionalOnClass</code>, <code>@ConditionalOnMissingBean</code>, <code>@ConditionalOnProperty</code></li>
+    <li>Starters: <code>spring-boot-starter-web</code> (Tomcat + Spring MVC), <code>starter-data-jpa</code>, <code>starter-security</code>, <code>starter-actuator</code>, <code>starter-test</code></li>
+    <li><code>application.yml</code> / <code>application.properties</code>: property hierarchy, environment variable override</li>
+    <li>Profiles: <code>@Profile("dev")</code>, <code>spring.profiles.active</code>, profile-specific property files</li>
+    <li><code>@ConfigurationProperties(prefix="...")</code> with <code>@Validated</code> and JSR-303 constraints</li>
+    <li><strong>Actuator</strong>: <code>/actuator/health</code>, <code>/metrics</code>, <code>/info</code>, <code>/env</code>, <code>/beans</code>, <code>/conditions</code>; expose only needed endpoints; secure in production</li>
+    <li>Externalized config: 12-factor app, environment variables, Kubernetes ConfigMaps/Secrets injection</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Multi-profile app (dev uses H2, prod uses Postgres); HikariCP pool size via properties; override auto-config with a custom bean</p>
+</div>
+
+<div class="week-card w3" id="w19">
+  <h3>Week 19 — AOP + Events + REST APIs</h3>
+  <ul>
+    <li><strong>AOP concepts</strong>: aspect, pointcut (expression language), joinpoint, advice (before/after/around/afterReturning/afterThrowing), weaving</li>
+    <li>JDK dynamic proxy (interfaces only) vs CGLIB (subclass proxy — can't proxy final classes)</li>
+    <li><strong>Self-invocation trap</strong>: <code>this.annotatedMethod()</code> bypasses proxy — AOP advice not applied; fix by injecting self or splitting into two beans</li>
+    <li><code>@Transactional</code> internals: proxy wraps bean; opens tx on entry, commits on exit, rolls back on RuntimeException; propagation (REQUIRED, REQUIRES_NEW, NESTED…); isolation levels</li>
+    <li>Spring Application Events: <code>ApplicationEventPublisher</code>, <code>@EventListener</code>, <code>@Async</code> listeners; <code>TransactionalEventListener</code></li>
+    <li>REST APIs: <code>@RestController</code>, <code>@GetMapping</code>/<code>@PostMapping</code>/etc., <code>@PathVariable</code>, <code>@RequestParam</code>, <code>@RequestBody</code>, <code>@ResponseStatus</code></li>
+    <li>Validation: <code>@Valid</code>, <code>@Validated</code>, Bean Validation constraints (<code>@NotNull</code>, <code>@Size</code>, <code>@Pattern</code>)</li>
+    <li>Global exception handling: <code>@ControllerAdvice</code>, <code>@ExceptionHandler</code>, <code>ProblemDetail</code> (RFC 9457)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> REST CRUD API with pagination (<code>Pageable</code>), validation, and global error handler returning structured error responses</p>
+</div>
+
+<div class="week-card w3" id="w20">
+  <h3>Week 20 — Spring Data JPA + Hibernate</h3>
+  <ul>
+    <li>JPA entities: <code>@Entity</code>, <code>@Id</code>, <code>@GeneratedValue</code>, <code>@Column</code>, <code>@Table</code>, <code>@Embeddable</code>, <code>@Embedded</code></li>
+    <li>Relationships: <code>@OneToOne</code>, <code>@OneToMany</code>/<code>@ManyToOne</code>, <code>@ManyToMany</code>; <code>mappedBy</code>, cascade types, <code>orphanRemoval</code></li>
+    <li>Persistence context: first-level cache per session; entity states: transient → managed → detached → removed</li>
+    <li>Dirty checking: Hibernate tracks managed entity changes and auto-generates UPDATE on flush; <code>flush()</code> vs <code>clear()</code></li>
+    <li>Lazy vs eager fetch: lazy = proxy loaded on access; <code>LazyInitializationException</code> outside session; eager = always loaded (over-fetching risk)</li>
+    <li><strong>N+1 problem</strong>: 1 query for list + N queries for associations. Fix: <code>JOIN FETCH</code>, <code>@EntityGraph</code>, <code>@BatchSize</code>, DTO projections</li>
+    <li>Spring Data: <code>JpaRepository</code>; derived query methods; <code>@Query</code> (JPQL + native); <code>@Modifying @Query</code> for bulk updates</li>
+    <li>Projections: interface projection (getter methods = SQL columns), DTO projection, dynamic projection</li>
+    <li>Optimistic locking: <code>@Version</code> field; <code>OptimisticLockingFailureException</code> on conflict; retry with <code>@Retryable</code></li>
+    <li>Pessimistic locking: <code>@Lock(LockModeType.PESSIMISTIC_WRITE)</code>; use sparingly</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> E-commerce data model (Product, Order, OrderItem, User); detect N+1 via SQL logging; fix with JOIN FETCH; implement inventory reservation with optimistic locking + retry</p>
+</div>
+
+<h3><span class="tag tag-month">Month 6</span> Spring Security + Testing + Project</h3>
+
+<div class="week-card w3" id="w21">
+  <h3>Week 21 — Spring Security</h3>
+  <ul>
+    <li>Security filter chain: each request passes through ordered filters (CORS → CSRF → authn → authz)</li>
+    <li><code>SecurityFilterChain</code> bean; <code>HttpSecurity</code> DSL; stateless session policy</li>
+    <li><code>UserDetailsService</code>: load user by username; <code>UserDetails</code> interface</li>
+    <li><code>PasswordEncoder</code>: BCrypt (adaptive cost), Argon2, PBKDF2; never store plain text</li>
+    <li><strong>JWT</strong>: structure = base64(header).base64(payload).signature; signing with RS256 or HS256; validation: signature, expiry, issuer, audience</li>
+    <li><code>nimbus-jose-jwt</code> / <code>io.jsonwebtoken</code>; JWK set URL for key rotation</li>
+    <li><strong>OAuth2 Resource Server</strong>: <code>oauth2ResourceServer(oauth2 -&gt; oauth2.jwt(...))</code>; <code>@AuthenticationPrincipal Jwt jwt</code></li>
+    <li>CSRF: needed for cookie/session-based auth; disable for stateless Bearer token APIs; <code>SameSite=Strict</code></li>
+    <li>CORS: <code>CorsConfigurationSource</code>; allowedOrigins (never <code>*</code> in prod); preflight OPTIONS handling</li>
+    <li>Method security: <code>@EnableMethodSecurity</code>; <code>@PreAuthorize</code>, <code>@PostAuthorize</code>, SpEL expressions</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Secure the Week 20 API: JWT resource server, RBAC (ADMIN can delete, USER can read), method-level security on admin endpoints</p>
+</div>
+
+<div class="week-card w3" id="w22">
+  <h3>Week 22 — Testing</h3>
+  <ul>
+    <li><strong>JUnit 5</strong>: <code>@Test</code>, <code>@BeforeEach</code>/<code>@AfterEach</code>, <code>@BeforeAll</code>/<code>@AfterAll</code>, <code>@ParameterizedTest</code> (with <code>@ValueSource</code>, <code>@CsvSource</code>, <code>@MethodSource</code>), <code>@Nested</code>, <code>@ExtendWith</code>, <code>@DisplayName</code></li>
+    <li><strong>Mockito</strong>: <code>@Mock</code>, <code>@Spy</code>, <code>@InjectMocks</code>; <code>when(...).thenReturn(...)</code>; <code>verify(...).method()</code>; <code>ArgumentCaptor</code>; <code>@Captor</code></li>
+    <li><strong>Spring Boot Test</strong>: <code>@SpringBootTest</code> (full context); <code>@WebMvcTest</code> (controller slice, no DB); <code>@DataJpaTest</code> (JPA slice, H2); <code>MockMvc</code> for controller tests</li>
+    <li><strong>Testcontainers</strong>: real PostgreSQL, Redis, Kafka in tests via Docker; <code>@Container</code>, <code>DynamicPropertySource</code>; no mocking of DB behavior</li>
+    <li><strong>WireMock</strong>: stub HTTP dependencies; <code>WireMockExtension</code>; verify calls made</li>
+    <li>Test pyramid: many unit tests, fewer integration tests, fewer E2E tests</li>
+    <li>Code coverage: JaCoCo; aim for 80%+ meaningful coverage (behavior, not lines)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Full test suite for Week 20 API: unit (service layer with Mockito), slice (@WebMvcTest + @DataJpaTest), integration (Testcontainers Postgres + WireMock for payment gateway)</p>
+</div>
+
+<div class="week-card w3" id="w23">
+  <h3>Week 23 — Phase 3 Project: RESTful E-commerce API</h3>
+  <div class="project-box">
+    <strong>Project: Production-quality E-commerce REST API</strong>
+    <ul>
+      <li><strong>Entities</strong>: Product, Category, Order, OrderItem, User, CartItem</li>
+      <li><strong>Auth</strong>: JWT resource server, RBAC (ADMIN/USER), method security</li>
+      <li><strong>JPA</strong>: proper relationships, optimistic locking on inventory, N+1-free queries</li>
+      <li><strong>Caching</strong>: Redis via <code>@Cacheable</code>/<code>@CacheEvict</code> on product catalog</li>
+      <li><strong>Observability</strong>: Actuator health/metrics, Micrometer custom counters for order events</li>
+      <li><strong>Tests</strong>: 80%+ coverage with unit, slice, and Testcontainers integration tests</li>
+      <li><strong>API docs</strong>: Springdoc OpenAPI (Swagger UI)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="week-card w3" id="w24">
+  <h3>Week 24 — Review + Source Code Reading</h3>
+  <ul>
+    <li>Close gaps from weeks 17–23 identified in self-assessment</li>
+    <li>Read Spring source: <code>AbstractBeanFactory.getBean</code> (bean creation), <code>JdkDynamicAopProxy.invoke</code> (AOP), <code>TransactionInterceptor.invoke</code> (transactions)</li>
+    <li>Write a "cheat sheet" of Spring gotchas (self-invocation, scope mismatch, lazy loading)</li>
+  </ul>
+  <div class="exit-box">
+    <strong>Phase 3 Exit Criteria:</strong> Build a secure, tested Spring Boot REST API from scratch. Explain @Transactional proxy behavior, detect and fix N+1, configure JWT security, write integration tests with Testcontainers.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 4                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph4" id="phase4">
+  <div class="phase-meta">Phase 4 · Month 7 · Weeks 25–28</div>
+  <h2>Databases + Messaging + Caching + Design Patterns</h2>
+</div>
+
+<div class="week-card w4" id="w25">
+  <h3>Week 25 — SQL Deep Dive</h3>
+  <ul>
+    <li><strong>DDL</strong>: <code>CREATE TABLE</code>, <code>ALTER TABLE</code>, <code>DROP</code>; constraints: PK, FK, UNIQUE, CHECK, NOT NULL, DEFAULT</li>
+    <li><strong>DML</strong>: INSERT, UPDATE, DELETE, MERGE (upsert); transactions: BEGIN/COMMIT/ROLLBACK, savepoints</li>
+    <li><strong>Joins</strong>: INNER, LEFT, RIGHT, FULL OUTER, CROSS, SELF; understanding execution plans for join strategies</li>
+    <li><strong>Aggregations</strong>: GROUP BY, HAVING, ROLLUP, CUBE; aggregate functions: SUM, COUNT, AVG, MIN, MAX, STRING_AGG</li>
+    <li><strong>CTEs</strong>: <code>WITH name AS (...)</code>; recursive CTEs for hierarchies (org charts, category trees)</li>
+    <li><strong>Window functions</strong>: <code>ROW_NUMBER</code>, <code>RANK</code>, <code>DENSE_RANK</code>, <code>LAG</code>, <code>LEAD</code>, <code>SUM/AVG OVER</code>, <code>PARTITION BY</code>, <code>ORDER BY</code> in window</li>
+    <li><strong>Indexes</strong>: B-tree (default, range queries), Hash (equality), composite (prefix rule), partial, covering; sargable predicates</li>
+    <li><strong>EXPLAIN ANALYZE</strong>: sequential scan vs index scan vs index-only scan; hash join vs nested loop vs merge join; actual vs estimated rows</li>
+    <li><strong>Partitioning</strong>: range, list, hash; partition pruning; when it helps (large tables, time-series)</li>
+    <li><strong>Materialized views</strong>: precomputed result; <code>REFRESH MATERIALIZED VIEW</code>; trade: staleness vs query speed</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Optimize 5 slow queries: add indexes, rewrite correlated subqueries as CTEs, use window functions for ranking — document before/after EXPLAIN ANALYZE</p>
+</div>
+
+<div class="week-card w4" id="w26">
+  <h3>Week 26 — Kafka + Redis + Elasticsearch</h3>
+  <ul>
+    <li><strong>Kafka</strong>: topics, partitions, replicas, offsets; producer: <code>acks=all</code>, <code>retries</code>, idempotence (<code>enable.idempotence=true</code>); consumer: poll loop, offset commit (auto vs manual), <code>max.poll.records</code>; consumer groups: partition assignment, rebalancing; ISR (in-sync replicas); delivery semantics: at-most-once, at-least-once (most common), exactly-once (transactions); compaction vs retention; <code>spring-kafka</code>: <code>@KafkaListener</code></li>
+    <li><strong>Redis</strong>: data structures: String (GET/SET/INCR), Hash (HGET/HSET), List (LPUSH/RPOP), Set (SADD/SMEMBERS), Sorted Set (ZADD/ZRANGE), Stream (XADD/XREAD); caching patterns: cache-aside (lazy), write-through, write-behind; TTL jitter to prevent thundering herd; distributed lock: <code>SET key token NX PX ttl</code> + Lua release script; pub/sub (ephemeral) vs streams (durable); Bloom filter for "not in DB" precheck; <code>spring-data-redis</code>, Lettuce client</li>
+    <li><strong>Elasticsearch</strong> (survey): inverted index; document-oriented; mappings: <code>text</code> (analyzed) vs <code>keyword</code> (exact match/sort); analyzers: tokenizer + filters; <code>match</code> query (analyzed) vs <code>term</code> (exact); BM25 relevance scoring; aggregations; index lifecycle; <code>spring-data-elasticsearch</code></li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Add Kafka order events to Phase 3 project; add Redis product catalog cache with stampede prevention; write a Kafka consumer with manual offset commit and idempotent processing</p>
+</div>
+
+<div class="week-card w4" id="w27">
+  <h3>Week 27 — Design Patterns</h3>
+  <ul>
+    <li><strong>Creational</strong>: Singleton (lazy + thread-safe via holder class), Builder (complex object construction), Factory Method (subclass decides product type), Abstract Factory (family of products), Prototype (clone)</li>
+    <li><strong>Structural</strong>: Adapter (incompatible interfaces), Decorator (add behavior without inheritance — Java streams, I/O), Facade (simplify subsystem), Composite (tree of same interface), Proxy (JDK dynamic proxy — AOP, Hibernate lazy loading)</li>
+    <li><strong>Behavioral</strong>: Observer (event-driven — Spring events), Strategy (swap algorithms at runtime), Template Method (skeleton in base class), State (finite state machine), Chain of Responsibility (filter chains), Mediator (reduce coupling), Command (encapsulate operation)</li>
+    <li>Each pattern: what problem it solves, when NOT to use it (avoid cargo-culting), where Spring uses it</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Refactor a "god service" using Strategy + Observer; identify Decorator in Java I/O; identify Factory Method in Spring BeanFactory</p>
+</div>
+
+<div class="week-card w4" id="w28">
+  <h3>Week 28 — Phase 4 Mini-Project</h3>
+  <div class="project-box">
+    <strong>Extend Phase 3 project with:</strong>
+    <ul>
+      <li>Kafka order events (producer on order creation; consumer updates analytics)</li>
+      <li>Redis caching with TTL jitter on product reads</li>
+      <li>SQL query optimization: run EXPLAIN ANALYZE on 3 slow queries, add indexes, document improvements</li>
+      <li>Apply at least 2 design patterns explicitly (e.g., Strategy for pricing, Observer for inventory alerts)</li>
+    </ul>
+  </div>
+  <div class="exit-box">
+    <strong>Phase 4 Exit Criteria:</strong> Write complex window function queries. Explain Kafka delivery semantics and idempotency. Configure Redis caching with stampede prevention. Apply design patterns with justification.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 5                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph5" id="phase5">
+  <div class="phase-meta">Phase 5 · Months 8–9 · Weeks 29–36</div>
+  <h2>Microservices Architecture + Docker + Kubernetes</h2>
+</div>
+
+<h3><span class="tag tag-month">Month 8</span> Microservices Architecture</h3>
+
+<div class="week-card w5" id="w29">
+  <h3>Week 29 — Microservices Foundations + DDD</h3>
+  <ul>
+    <li><strong>Monolith vs microservices</strong>: monolith = simpler ops, faster dev, harder to scale independently; microservices = independent deploy/scale, team autonomy, higher ops complexity</li>
+    <li>When NOT to use microservices: small team, greenfield (unknown boundaries), tight latency budgets</li>
+    <li><strong>Domain-Driven Design basics</strong>: bounded context (clear boundary of a domain model), aggregate (cluster of entities with one root), domain events, ubiquitous language</li>
+    <li>Service boundary heuristics: split by business capability, by data ownership (each service owns its DB), by change frequency, by team size (Conway's Law)</li>
+    <li><strong>Hexagonal architecture</strong> (Ports &amp; Adapters): domain core (pure business logic) + ports (interfaces) + adapters (HTTP, DB, Kafka, CLI); domain never depends on frameworks</li>
+    <li><strong>Clean architecture</strong>: entities → use cases → interface adapters → frameworks; inner circles never import outer</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Split Phase 3 e-commerce project into 3 bounded contexts: User, Product Catalog, Order Fulfillment. Define APIs and events between them. Draw context map.</p>
+</div>
+
+<div class="week-card w5" id="w30">
+  <h3>Week 30 — Inter-Service Communication + Resilience</h3>
+  <ul>
+    <li><strong>Synchronous REST</strong>: <code>WebClient</code> (reactive, non-blocking, preferred); <code>OpenFeign</code> (declarative client with <code>@FeignClient</code>); <code>RestTemplate</code> (legacy, deprecated)</li>
+    <li><strong>Asynchronous</strong>: event-driven via Kafka; services decoupled, higher availability, eventual consistency</li>
+    <li><strong>API Gateway</strong>: Spring Cloud Gateway; routing by path/host; rate limiting (RequestRateLimiter filter); auth offloading; request/response transformation</li>
+    <li><strong>Service discovery</strong>: Eureka (client-side load balancing); in Kubernetes, use K8s DNS instead</li>
+    <li><strong>Resilience4j</strong>: <code>@CircuitBreaker</code> (CLOSED/OPEN/HALF_OPEN); <code>@Retry</code> (with backoff + jitter); <code>@RateLimiter</code>; <code>@Bulkhead</code> (limit concurrent calls); <code>@TimeLimiter</code> (timeout)</li>
+    <li>Fallback methods: return cached data or degraded response when circuit is open</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Order service calls Inventory service via Feign; add Resilience4j circuit breaker + retry with exponential backoff; simulate Inventory service failure; verify fallback</p>
+</div>
+
+<div class="week-card w5" id="w31">
+  <h3>Week 31 — Distributed Data Patterns</h3>
+  <ul>
+    <li><strong>2PC problem</strong>: two-phase commit across services requires both to be available simultaneously — fragile, blocking; avoid in microservices</li>
+    <li><strong>Saga pattern</strong>: choreography (services react to events, no central coordinator — eventual consistency, hard to debug) vs orchestration (saga orchestrator coordinates steps, easier to reason about)</li>
+    <li><strong>Outbox pattern</strong>: write business data AND outbox event in same DB transaction; separate publisher reads outbox and sends to Kafka; guarantees atomicity without 2PC. CDC via Debezium as alternative to polling</li>
+    <li><strong>CQRS</strong>: Command Query Responsibility Segregation — write model (domain events, aggregates) ≠ read model (denormalized projections); enables independent scaling</li>
+    <li><strong>Event sourcing</strong>: store state as sequence of events; rebuild by replaying; audit trail built in; complex to query</li>
+    <li><strong>Idempotency</strong>: idempotency key (UUID per operation); deduplication store (Redis or DB); upsert semantics; critical for retries</li>
+    <li><strong>Distributed tracing</strong>: OpenTelemetry SDK; trace propagation via W3C <code>traceparent</code> header; spans for each service; Jaeger/Zipkin for visualization</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Implement Outbox pattern: order service writes order + outbox event in one transaction; outbox poller publishes to Kafka; inventory service consumes idempotently</p>
+</div>
+
+<div class="week-card w5" id="w32">
+  <h3>Week 32 — Docker</h3>
+  <ul>
+    <li>Images and containers: image = read-only layers; container = running instance of image</li>
+    <li>Dockerfile: <code>FROM</code>, <code>WORKDIR</code>, <code>COPY</code>, <code>RUN</code>, <code>EXPOSE</code>, <code>ENTRYPOINT</code>/<code>CMD</code></li>
+    <li><strong>Multi-stage builds</strong>: Stage 1: JDK + build; Stage 2: slim JRE + copy artifact only. Reduce image size from ~500 MB to ~100 MB</li>
+    <li>Volumes: named volumes (persistent data), bind mounts (dev: live code reload)</li>
+    <li>Networking: bridge (default, container-to-container), host, overlay (Swarm/K8s); DNS resolution by container name</li>
+    <li><code>docker-compose</code>: define multi-service local environment; depends_on; health checks; environment variables</li>
+    <li>Security: run as non-root user; never store secrets in layers; use <code>.dockerignore</code>; scan images (<code>docker scout</code>, Trivy)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Dockerize all 3 microservices (multi-stage); write docker-compose.yml with Postgres, Redis, Kafka (Redpanda); verify startup order with health checks</p>
+</div>
+
+<h3><span class="tag tag-month">Month 9</span> Kubernetes</h3>
+
+<div class="week-card w5" id="w33">
+  <h3>Week 33 — Kubernetes Core Objects</h3>
+  <ul>
+    <li><strong>Pod</strong>: smallest deployable unit; one or more containers sharing network namespace and storage</li>
+    <li><strong>Deployment</strong>: manages ReplicaSets; declarative rolling updates; rollback with <code>kubectl rollout undo</code></li>
+    <li><strong>StatefulSet</strong>: stable pod identity and persistent storage; for databases</li>
+    <li><strong>DaemonSet</strong>: one pod per node; for log collectors, monitoring agents</li>
+    <li><strong>Service types</strong>: ClusterIP (internal), NodePort (external via node), LoadBalancer (cloud LB), ExternalName; headless service for StatefulSet DNS</li>
+    <li><strong>ConfigMaps</strong>: non-sensitive config as env vars or volume-mounted files</li>
+    <li><strong>Secrets</strong>: base64-encoded (not encrypted at rest by default; use Sealed Secrets or External Secrets Operator)</li>
+    <li><strong>Persistent Volumes</strong> and PVCs; StorageClasses; dynamic provisioning</li>
+    <li>Essential <code>kubectl</code>: <code>get</code>, <code>describe</code>, <code>logs -f</code>, <code>exec -it</code>, <code>apply -f</code>, <code>delete</code>, <code>rollout status</code>, <code>port-forward</code></li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Deploy 3 microservices to minikube or kind; expose via Services; verify inter-service DNS resolution; test rolling update</p>
+</div>
+
+<div class="week-card w5" id="w34">
+  <h3>Week 34 — Kubernetes Advanced: Ingress, HPA, Helm</h3>
+  <ul>
+    <li><strong>Ingress</strong>: HTTP/HTTPS routing by host/path; TLS termination; NGINX Ingress Controller; annotations for rate limiting, auth</li>
+    <li><strong>HPA (Horizontal Pod Autoscaler)</strong>: scale based on CPU (default), memory, or custom metrics (Prometheus Adapter)</li>
+    <li><strong>Probes</strong>: Liveness (restart if unhealthy), Readiness (remove from Service endpoints until ready), Startup (for slow-starting apps). Wrong config = traffic loss on deployment or restart loops</li>
+    <li><strong>Resource requests and limits</strong>: requests = scheduler placement; limits = cgroup enforcement. OOMKill if memory limit exceeded. QoS classes: Guaranteed/Burstable/BestEffort</li>
+    <li><strong>Rolling updates</strong>: <code>maxSurge</code>, <code>maxUnavailable</code>; blue-green (switch Service selector); canary (weight-based traffic split)</li>
+    <li><strong>Helm</strong>: chart structure (templates, values.yaml, Chart.yaml); <code>helm install</code>/<code>upgrade</code>/<code>rollback</code>; templating (<code>{{ .Values.x }}</code>); Helm repositories</li>
+    <li>Namespace isolation; RBAC: <code>Role</code>, <code>ClusterRole</code>, <code>RoleBinding</code>, <code>ClusterRoleBinding</code>; service accounts</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Add HPA to Order service; configure readiness/liveness probes with Spring Boot actuator endpoints; create Helm chart for all 3 services; deploy with Helm</p>
+</div>
+
+<div class="week-card w5" id="w35">
+  <h3>Week 35 — Observability + Service Mesh (Survey)</h3>
+  <ul>
+    <li><strong>Prometheus</strong>: pull-based metrics scraping; PromQL basics (<code>rate</code>, <code>histogram_quantile</code>, <code>sum by</code>); alerting rules; <code>ServiceMonitor</code> CRD for K8s scraping</li>
+    <li><strong>Grafana</strong>: dashboards from Prometheus; RED method panels (Rate, Errors, Duration); USE method; import community dashboards</li>
+    <li><strong>Micrometer</strong>: metrics facade in Spring Boot; auto-instruments HTTP, JVM, HikariCP, Kafka; custom <code>Counter</code>, <code>Timer</code>, <code>Gauge</code>; exports to Prometheus via <code>/actuator/prometheus</code></li>
+    <li><strong>Distributed tracing</strong>: Micrometer Tracing (Spring Boot 3) with OTel bridge; <code>traceparent</code> header propagation; Jaeger or Zipkin backend; trace IDs in every log line</li>
+    <li><strong>Structured logging</strong>: JSON logs (Logback + logstash-logback-encoder); correlation ID in MDC; Loki + Grafana or ELK for aggregation</li>
+    <li><strong>Service mesh survey</strong>: Istio/Linkerd; sidecar proxy (Envoy); mTLS between services; traffic management (weighted routing, fault injection); observability without code changes</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Install kube-prometheus-stack (Prometheus + Grafana) in minikube; configure Spring Boot to expose Prometheus metrics; build RED dashboard in Grafana</p>
+</div>
+
+<div class="week-card w5" id="w36">
+  <h3>Week 36 — Phase 5 Capstone: Full Microservices System</h3>
+  <div class="project-box">
+    <strong>3-Service Microservices System on Kubernetes</strong>
+    <ul>
+      <li><strong>Services</strong>: User Service (auth), Order Service (ordering + Outbox), Inventory Service (stock management)</li>
+      <li><strong>Communication</strong>: Feign (sync) + Kafka (async events) + Resilience4j circuit breaker</li>
+      <li><strong>Data</strong>: Postgres per service (separate DBs); Redis cache per service; Outbox pattern for order events</li>
+      <li><strong>K8s</strong>: Deployments, Services, Ingress, HPA, readiness/liveness probes; Helm charts for each service</li>
+      <li><strong>Observability</strong>: Prometheus + Grafana (RED dashboard); Jaeger distributed traces; structured JSON logs</li>
+      <li><strong>Local setup</strong>: docker-compose.yml for local dev; minikube for K8s testing</li>
+    </ul>
+  </div>
+  <div class="exit-box">
+    <strong>Phase 5 Exit Criteria:</strong> Deploy a multi-service system to Kubernetes from scratch. Explain Outbox pattern. Show a distributed trace across 3 services. Configure HPA and demonstrate auto-scaling.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 6                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph6" id="phase6">
+  <div class="phase-meta">Phase 6 · Month 10 · Weeks 37–40</div>
+  <h2>AWS Cloud</h2>
+</div>
+
+<div class="week-card w6" id="w37">
+  <h3>Week 37 — AWS Foundations: IAM, VPC, EC2, S3</h3>
+  <ul>
+    <li><strong>IAM</strong>: users (long-lived — minimize), groups (apply policies to users), roles (assumed by services/EC2/Lambda — preferred), policies (JSON: Effect/Action/Resource); instance profiles; least privilege; <code>sts:AssumeRole</code>; service-linked roles</li>
+    <li><strong>VPC</strong>: CIDR block; public subnets (internet gateway) vs private subnets (NAT gateway); route tables; security groups (stateful, instance-level) vs NACLs (stateless, subnet-level); VPC peering; VPC endpoints (PrivateLink)</li>
+    <li><strong>EC2</strong>: instance types (t3/m5/c5/r5 families); AMIs; key pairs; user data (startup scripts); Auto Scaling Groups + launch templates; placement groups (cluster/spread); elastic IPs; Elastic Load Balancer (ALB/NLB)</li>
+    <li><strong>S3</strong>: buckets, objects (up to 5 TB), prefixes; storage classes (Standard, IA, Glacier); bucket policies vs ACLs; pre-signed URLs (temporary access); lifecycle rules; versioning; event notifications → Lambda/SQS; Cross-Origin Resource Sharing</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Create VPC with public/private subnets; launch EC2 in private subnet; S3 bucket with lifecycle policy; IAM role for EC2 to access S3 (no access keys)</p>
+</div>
+
+<div class="week-card w6" id="w38">
+  <h3>Week 38 — Managed Services: RDS, EKS, Lambda, SQS/SNS</h3>
+  <ul>
+    <li><strong>RDS</strong>: Multi-AZ (synchronous standby for HA, automatic failover); Read Replicas (async, for read scaling, cross-region); automated backups + snapshots; parameter groups; Aurora Serverless v2 (auto-scales capacity)</li>
+    <li><strong>ElastiCache</strong>: Redis Cluster Mode (horizontal sharding); replication groups; eviction policies (LRU, LFU); Multi-AZ; use cases: session store, caching, leaderboard</li>
+    <li><strong>ECS vs EKS</strong>: ECS Fargate (serverless containers, simpler, no K8s overhead) vs ECS EC2 (more control) vs EKS (full Kubernetes, best for complex microservices); task definitions; service auto-scaling; EKS Fargate profiles</li>
+    <li><strong>Lambda</strong>: function lifecycle (init → invoke → shutdown); cold start mitigation (Provisioned Concurrency, SnapStart for Java); concurrency limits; layers; destinations; Lambda + API Gateway (REST/HTTP API); Lambda + SQS/SNS/Kinesis/DynamoDB Streams triggers</li>
+    <li><strong>SQS</strong>: standard (at-least-once, best effort ordering) vs FIFO (exactly-once, strict ordering); visibility timeout; dead-letter queues (DLQ); long polling; message filtering via attributes</li>
+    <li><strong>SNS</strong>: pub/sub; topic subscriptions (SQS, Lambda, HTTP, email, SMS); message filtering; fan-out: SNS → multiple SQS queues</li>
+    <li><strong>MSK</strong>: Amazon Managed Streaming for Kafka; survey level</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Lambda triggered by SQS; process order events from SQS, write to RDS; dead-letter queue for failures; CloudWatch logs for Lambda</p>
+</div>
+
+<div class="week-card w6" id="w39">
+  <h3>Week 39 — Monitoring, Security, Cost Optimization</h3>
+  <ul>
+    <li><strong>CloudWatch</strong>: metrics (namespace, dimensions); Logs (log groups, log streams, Insights query language); alarms (threshold, anomaly detection); dashboards; Container Insights; Application Insights</li>
+    <li><strong>CloudTrail</strong>: API audit log; who called what API, from where, when; required for compliance; S3 bucket for trail storage</li>
+    <li><strong>Secrets Manager</strong>: automatic rotation for RDS, Redshift; versioned secrets; Lambda function for custom rotation. vs <strong>Parameter Store</strong>: cheaper, no auto-rotation, for config values</li>
+    <li><strong>KMS</strong>: customer master keys (CMK); envelope encryption; key policies; <code>aws kms encrypt/decrypt</code>; AWS-managed keys vs customer-managed</li>
+    <li><strong>ACM</strong>: free TLS certificates for ALB, CloudFront, API Gateway; automatic renewal</li>
+    <li><strong>WAF</strong>: web ACL; AWS Managed Rules (Core Rule Set, Known Bad Inputs); rate-based rules; IP reputation lists; attach to ALB, API Gateway, CloudFront</li>
+    <li><strong>Cost optimization</strong>: right-sizing (CloudWatch metrics → smaller instance); Reserved Instances (1/3 yr commitment, up to 72% off); Savings Plans (flexible, hour-based commitment); Spot Instances (up to 90% off, interruptible); S3 Intelligent-Tiering</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> Set up CloudWatch alarms for Lambda errors + duration; configure Secrets Manager for RDS password with auto-rotation; WAF on ALB with AWS Managed Rules</p>
+</div>
+
+<div class="week-card w6" id="w40">
+  <h3>Week 40 — IaC + CI/CD + Phase 6 Project</h3>
+  <ul>
+    <li><strong>Infrastructure as Code</strong>: AWS CDK (Java): define AWS resources as Java code; stacks, constructs (L1/L2/L3); <code>cdk deploy</code>/<code>diff</code>/<code>destroy</code>. Terraform (HCL): providers, resources, variables, outputs, state, modules; <code>plan</code>/<code>apply</code></li>
+    <li><strong>GitHub Actions</strong>: workflow YAML; triggers (push, PR, schedule); jobs + steps; actions marketplace; secrets; CI pipeline: checkout → test → build → Docker build/push to ECR → K8s deploy</li>
+    <li><strong>ECR</strong>: private container registry; image scanning on push (Trivy/Clair); lifecycle policies (delete untagged, keep last N); authenticate with <code>aws ecr get-login-password</code></li>
+    <li><strong>CodePipeline + CodeBuild</strong> (survey): AWS-native CI/CD; CodeBuild: managed build environment; buildspec.yml; integration with CodeCommit/GitHub</li>
+  </ul>
+  <div class="project-box">
+    <strong>Phase 6 Project: Phase 5 System Deployed to AWS EKS</strong>
+    <ul>
+      <li>EKS cluster via CDK or Terraform; node groups with Auto Scaling</li>
+      <li>RDS Postgres (Multi-AZ) + ElastiCache Redis in private subnets</li>
+      <li>Secrets Manager for DB credentials injected into pods via External Secrets Operator</li>
+      <li>ALB Ingress with ACM TLS certificate + WAF</li>
+      <li>CloudWatch Container Insights + alarms for error rate and latency</li>
+      <li>GitHub Actions pipeline: test → Docker build → push to ECR → helm upgrade on EKS</li>
+    </ul>
+  </div>
+  <div class="exit-box">
+    <strong>Phase 6 Exit Criteria:</strong> Architect a production AWS deployment with IAM least privilege, VPC isolation, managed DB, secrets management, automated CI/CD, and CloudWatch observability.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- PHASE 7                                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="phase-header ph7" id="phase7">
+  <div class="phase-meta">Phase 7 · Months 11–12 · Weeks 41–48</div>
+  <h2>System Design + DSA + Interview Prep + Capstone</h2>
+</div>
+
+<h3><span class="tag tag-month">Month 11</span> System Design + DSA</h3>
+
+<div class="week-card w7" id="w41">
+  <h3>Week 41–42 — System Design</h3>
+  <ul>
+    <li><strong>Interview framework</strong>: (1) requirements (functional + non-functional: QPS, latency p99, availability %, data volume), (2) API design, (3) data model, (4) high-level architecture, (5) deep-dive bottlenecks, (6) failure modes + mitigations, (7) observability + cost</li>
+    <li><strong>CAP theorem</strong>: under network partition, choose Consistency (reject requests) or Availability (return possibly stale data). Most systems choose AP + eventual consistency + explicit strong consistency where needed</li>
+    <li><strong>Consistency models</strong>: strong, linearizable, sequential, causal, eventual, read-your-writes, monotonic read</li>
+    <li><strong>Raft consensus</strong>: leader election, log replication, majority quorum, log compaction; split brain prevention via quorum requirement</li>
+    <li><strong>Sharding</strong>: range (hot partitions risk) vs hash (even distribution, no range queries) vs directory-based; consistent hashing + virtual nodes; rebalancing strategies</li>
+    <li><strong>Replication</strong>: synchronous (strong consistency, higher write latency) vs asynchronous (higher availability, risk of data loss); read replicas; leaderless (Dynamo-style, vector clocks)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice (one per day, 45 min + 15 min review):</span> URL shortener · Rate limiter · Distributed cache · Notification system · News feed / timeline · Ride-sharing backend · Payment system · Video streaming service</p>
+</div>
+
+<div class="week-card w7" id="w43">
+  <h3>Week 43–44 — Data Structures + Algorithms</h3>
+  <ul>
+    <li><strong>Arrays/Strings</strong>: two pointers (sorted array pair sum, container with most water), sliding window (max sum subarray, longest unique substring), prefix sum (range sum query)</li>
+    <li><strong>Linked lists</strong>: reverse, detect cycle (Floyd's), merge two sorted, find middle, remove nth from end</li>
+    <li><strong>Stacks/Queues</strong>: monotonic stack (next greater element, largest rectangle), deque patterns (sliding window max), min stack</li>
+    <li><strong>Trees</strong>: BST insert/search/delete, validate BST, BFS (level-order), DFS (preorder/inorder/postorder), lowest common ancestor, serialize/deserialize, diameter</li>
+    <li><strong>Heaps</strong>: top-K elements (min-heap of size K), merge K sorted lists, kth largest element, median of data stream</li>
+    <li><strong>Graphs</strong>: BFS (shortest path unweighted), DFS (connected components), Dijkstra (weighted shortest path), Union-Find (cycle detection, number of islands), topological sort (course schedule), Bellman-Ford</li>
+    <li><strong>Dynamic programming</strong>: 0/1 knapsack, unbounded knapsack, LCS (longest common subsequence), LIS (longest increasing subsequence), coin change, matrix DP (unique paths, minimum path sum), interval DP</li>
+    <li><strong>Sorting</strong>: merge sort (stable, O(n log n)), quicksort (avg O(n log n), in-place), counting sort / radix sort (linear for limited range); binary search variants (first/last occurrence, rotated array)</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> 50 LeetCode problems by pattern (not random): sliding window (5), two pointers (5), binary search (5), trees (10), graphs (8), DP (10), heap (7)</p>
+</div>
+
+<h3><span class="tag tag-month">Month 12</span> Interview Prep + Capstone</h3>
+
+<div class="week-card w7" id="w45">
+  <h3>Week 45–46 — Java/Spring Interview Drill</h3>
+  <p>Answer all of these without notes:</p>
+  <ul>
+    <li>HashMap: hash function, bucket array, collision chaining, treeification threshold (8 bins + table ≥ 64), load factor (0.75), resize (double), mutable key danger</li>
+    <li>JMM: happens-before, volatile (visibility not atomicity), double-checked locking requires volatile, CAS and ABA</li>
+    <li>GC: G1 vs ZGC selection criteria; heap dump workflow; OOM triage playbook</li>
+    <li>@Transactional: proxy wrapping, self-invocation bypass, propagation types, rollback rules, isolation levels</li>
+    <li>N+1: detect via SQL logging; fix with JOIN FETCH / Entity Graph / batch fetch; trade-offs</li>
+    <li>JWT: header.payload.signature; RS256 vs HS256; validation steps (sig, exp, iss, aud); JWK set rotation</li>
+    <li>Virtual threads: blocking I/O scale; pinning on synchronized; not for CPU-bound</li>
+    <li>Kafka: at-least-once default; idempotent producer; exactly-once semantics; partition ordering</li>
+    <li>Outbox pattern: why it solves dual write; polling publisher vs Debezium CDC</li>
+    <li>CAP: Kafka is CP-leaning; Cassandra is AP; what your system chooses</li>
+  </ul>
+  <p><span class="tag tag-practice">Practice</span> 2 mock interviews/week: 1 Java/Spring technical (45 min) + 1 system design (60 min); record yourself; review and improve</p>
+</div>
+
+<div class="week-card w7" id="w47">
+  <h3>Week 47–48 — Final Capstone + Portfolio</h3>
+  <div class="project-box">
+    <strong>Final Capstone: Production-Grade Event-Driven E-commerce Platform</strong>
+    <ul>
+      <li><strong>4 Services</strong>: User (auth + profile), Catalog (products + search via Elasticsearch), Order (checkout + Saga orchestrator), Payment (processing + retries)</li>
+      <li><strong>Kafka-based Saga</strong>: order placement triggers compensation chain across services; Outbox pattern for atomicity</li>
+      <li><strong>Caching</strong>: Redis with cache-aside + TTL jitter; distributed rate limiter on checkout</li>
+      <li><strong>Auth</strong>: Spring Security + JWT + OAuth2 (Keycloak as IdP)</li>
+      <li><strong>AWS EKS</strong>: Helm charts per service; RDS Postgres + ElastiCache Redis; Secrets Manager; ALB Ingress + WAF</li>
+      <li><strong>CI/CD</strong>: GitHub Actions → ECR → Helm upgrade → EKS</li>
+      <li><strong>Observability</strong>: Prometheus + Grafana (RED dashboards) + Jaeger traces + structured JSON logs</li>
+      <li><strong>README</strong>: architecture diagram, bounded context map, design decisions, trade-offs, local setup guide</li>
+    </ul>
+  </div>
+  <div class="project-box">
+    <strong>Portfolio + Job Search</strong>
+    <ul>
+      <li>GitHub: 4–5 projects with clean READMEs, architecture diagrams, live demo links</li>
+      <li>LinkedIn: updated headline, about section, skills, project descriptions with measurable impact</li>
+      <li>Resume: 1 page, 3–5 bullet points per project (metric-driven: "reduced p99 latency by 40%")</li>
+      <li>Technical blog: write 2–3 posts explaining what you built and why (shows depth)</li>
+    </ul>
+  </div>
+  <div class="exit-box">
+    <strong>Final Exit Criteria (Top 1%):</strong> You can design and build a production-grade distributed system end-to-end. You can explain every design decision. You can debug any Java/Spring/K8s/AWS issue systematically. You can deliver a full system design in 60 minutes with SLOs, failure modes, and trade-offs.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- RESOURCES                                               -->
+<!-- ══════════════════════════════════════════════════════ -->
+<h2 id="resources" style="margin-top:3rem;">Curated Resources</h2>
+<div class="resources-grid">
+  <div class="resource-card">
+    <h4>Java Language</h4>
+    <p>"Effective Java" — Joshua Bloch (must-read)<br>JDK source code: HashMap, CompletableFuture, Stream</p>
+  </div>
+  <div class="resource-card">
+    <h4>Concurrency</h4>
+    <p>"Java Concurrency in Practice" — Goetz et al. (definitive)<br>JCP source code examples</p>
+  </div>
+  <div class="resource-card">
+    <h4>JVM + Performance</h4>
+    <p>"Java Performance" — Scott Oaks (2nd ed.)<br>async-profiler docs, JMH samples</p>
+  </div>
+  <div class="resource-card">
+    <h4>Spring</h4>
+    <p>Official Spring docs (docs.spring.io)<br>"Spring in Action" — Craig Walls (6th ed.)</p>
+  </div>
+  <div class="resource-card">
+    <h4>System Design</h4>
+    <p>"Designing Data-Intensive Applications" — Kleppmann<br>"System Design Interview" — Alex Xu (Vol 1 + 2)</p>
+  </div>
+  <div class="resource-card">
+    <h4>DSA</h4>
+    <p>LeetCode.com — by pattern (not random)<br>Neetcode.io — structured roadmap + video explanations</p>
+  </div>
+  <div class="resource-card">
+    <h4>Kafka</h4>
+    <p>"Kafka: The Definitive Guide" — Shapira et al.<br>Confluent Developer (developer.confluent.io)</p>
+  </div>
+  <div class="resource-card">
+    <h4>AWS</h4>
+    <p>AWS Official Docs (aws.amazon.com/documentation)<br>Stephane Maarek courses (Udemy) — SAA-C03 + DVA-C02</p>
+  </div>
+  <div class="resource-card">
+    <h4>Kubernetes</h4>
+    <p>kubernetes.io/docs (official, excellent)<br>"Kubernetes in Action" — Marko Luksa</p>
+  </div>
+</div>
+
+<p style="text-align:center;color:#999;font-size:.8rem;margin-top:3rem;padding-top:1rem;border-top:1px solid #eee;">
+  1-Year Java Developer Roadmap — Top 1% · 48 Weeks · 7 Phases · Java 21 → Spring Boot → Microservices → K8s → AWS<br>
+  Open in Chrome → Ctrl+P → Save as PDF (sidebar hidden automatically in print)
+</p>
+
+</main>
+</body>
+</html>
